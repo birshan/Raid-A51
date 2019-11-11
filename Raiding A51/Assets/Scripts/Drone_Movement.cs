@@ -4,30 +4,47 @@ using UnityEngine;
 
 public class Drone_Movement : MonoBehaviour
 {
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //exit the drone cam and unspawn it.
+        Debug.Log("Collided");
+    }
     public float speed;
-    public float maxSpeed = 1000;
-    public float acceleration=30;
-    public float sideWaysSpeed = 5;
-    public float rotation;
+   
+    //public float rotation;
     public float ascent = 5;
-    public float controlledDescent = 0.1f;
+
     private GameObject[] rotorBlades;
-    private float zRotation;
-    private float xRotation;
+  
    
     private float RotorSpeed = 10;
     private Rigidbody rb;
-    float tiltAngle = -60.0f;
+    //float tiltAngle = -60.0f;
+    private GameObject droneMove;
+
+    public float rotationSpeed = 50f; //for rotating the drone itself based on movement
+  
+    private float x;
+    private float z;
+
+    public float turnSpeed = 1; //FOr turning the drone left or right on the Y axis. Different from above stuff
 
     void Start()
     {
         rotorBlades = GameObject.FindGameObjectsWithTag("RotorPart");
 
-        rb = GetComponent<Rigidbody>();
 
-        zRotation = transform.rotation.z;
-        xRotation = transform.rotation.x;
+ 
+        droneMove = GameObject.Find("DroneMove");
+
+        rb = droneMove.GetComponent<Rigidbody>();
+
+        x = 0.0f;
+        z = 0.0f;
         
+        rotationSpeed = 30.0f;
+
     }
 
 
@@ -35,12 +52,8 @@ public class Drone_Movement : MonoBehaviour
     void FixedUpdate()
     {
 
-        float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle; //will tilt the disk to turning side
 
-
-        Quaternion cube = Quaternion.Euler(tiltAroundZ, 0, tiltAroundZ);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, cube, Time.deltaTime);
+        //Movement stuff below
 
         foreach (GameObject r in rotorBlades)
         {
@@ -48,75 +61,52 @@ public class Drone_Movement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space))
         {
-           // this.transform.Translate(0, ascent, 0);
-          rb.AddForce(0, ascent * Time.deltaTime, 0);
+           droneMove.transform.Translate(0, ascent * Time.deltaTime, 0);
+         
             RotorSpeed = 100;
         }
+        
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            transform.Translate(0, controlledDescent * Time.deltaTime, 0);
+            droneMove.transform.Translate(0, -ascent * Time.deltaTime, 0);
             RotorSpeed = 20;
         }
-        if (Input.GetKey(KeyCode.W))
+
+
+        float horizontal = Input.GetAxis("Horizontal") * speed;
+        float vertical = Input.GetAxis("Vertical") * speed;
+
+        droneMove.transform.Translate(horizontal, 0, vertical); //all movement
+
+
+        //Rotation stuff below
+        z = 0; //reset
+            
+        if (horizontal!= 0 && (z < 30.0f && z > -30.0f))
         {
-            RotorSpeed = 100;
-            if (speed < maxSpeed)
-            {
-                speed += acceleration;
+            z += rotationSpeed * -horizontal;
+        }
+        
+        x = 0; //reset
+        
+        if(vertical!=0 && (x<30.0f && x > -30.0f)){
+            x += rotationSpeed * vertical;
+        }
+        
 
-            }
-          //  rb.AddForce(0, 0, speed * Time.deltaTime);
+        transform.localRotation = Quaternion.Euler(x, 0, z);
 
+
+        if (Input.GetKey(KeyCode.Z))
+        {
+            droneMove.transform.Rotate(0, -turnSpeed, 0);
+            
+        }
+        else if (Input.GetKey(KeyCode.X))
+        {
+            droneMove.transform.Rotate(0, turnSpeed, 0);
         }
 
-        else
-        {
-            if (speed > 0)
-            {
-                speed -= acceleration;
-                RotorSpeed = 20;
-             
-            }
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            RotorSpeed = 100;
-            if (speed > -maxSpeed)
-            {
-                speed -= acceleration;
-
-            }
-            //  rb.AddForce(0, 0, speed * Time.deltaTime);
-
-        }
-        else
-        {
-            if (speed < 0)
-            {
-                speed += acceleration;
-                RotorSpeed = 20;
-
-            }
-        }
-
-
-        transform.position += transform.forward * Time.deltaTime * speed;
-
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(sideWaysSpeed * Time.deltaTime, 0, 0);
-          // transform.Rotate(0, rotation, 0);
-            //left.transform.Rotate(wheelSpeed, 0, 0);
-            //right.transform.Rotate(-wheelSpeed, 0, 0);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(-sideWaysSpeed * Time.deltaTime, 0, 0);
-            // transform.Rotate(0, -rotation, 0);
-            // left.transform.Rotate(-wheelSpeed, 0, 0);
-            //right.transform.Rotate(wheelSpeed, 0, 0);
-        }
 
     }
 }
