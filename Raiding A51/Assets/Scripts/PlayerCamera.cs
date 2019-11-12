@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public static float CameraSensitivity; //create a variable here
-   
+    public float CameraSensitivity = 100f;
+
     void Start()
     {
-        CameraSensitivity = Variables.CameraSensitivity; // set the value here
+        
     }
 
     // Update is called once per frame

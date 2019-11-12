@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public static float MouseSensitivity; //create a variable here
-    public static float MoveSpeed;
+    
+    public float MouseSensitivity = 100f;
+
+    
+    public float MoveSpeed = 10f;
 
 
     void Start()
     {
-        MouseSensitivity = Variables.MouseSensitivity; //pull it up here
-        MoveSpeed = Variables.MoveSpeed; //set the value from the Variables script here
+        
     }
 
     void Update()
