@@ -475,14 +475,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3663973626887654550}
-  m_LocalRotation: {x: -0.48162, y: -0, z: -0, w: 0.8763802}
-  m_LocalPosition: {x: 0, y: 0.6, z: 1.02}
+  m_LocalRotation: {x: -0.53011626, y: -0, z: -0, w: 0.84792495}
+  m_LocalPosition: {x: 0, y: -0.6599856, z: 1.0708385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3427039971798401698}
   - {fileID: 4755655231896445576}
-  m_Father: {fileID: 5807134623393769500}
-  m_RootOrder: 7
+  m_Father: {fileID: 2766351867143396235}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -57.582005, y: 0, z: 0}
 --- !u!1 &3914507179419989026
 GameObject:
@@ -591,7 +591,9 @@ Transform:
   m_LocalRotation: {x: 0.056205776, y: -0, z: -0, w: 0.9984193}
   m_LocalPosition: {x: 0, y: 1.376, z: 0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 654485320055441281}
+  - {fileID: 5503021621097600420}
   m_Father: {fileID: 5807134623393769500}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 6.4440002, y: 0, z: 0}
@@ -658,6 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090506412e889b947b5128e9bad9b42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraSensitivity: 100
 --- !u!1 &4205524739578736339
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,14 +762,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4220203641103446617}
-  m_LocalRotation: {x: -0.48162, y: -0, z: -0, w: 0.8763802}
-  m_LocalPosition: {x: 0, y: 0.6, z: 1.02}
+  m_LocalRotation: {x: -0.53011626, y: -0, z: -0, w: 0.84792495}
+  m_LocalPosition: {x: 0, y: -0.6599856, z: 1.0708385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2423342069877870138}
   - {fileID: 2760111796856526371}
-  m_Father: {fileID: 5807134623393769500}
-  m_RootOrder: 6
+  m_Father: {fileID: 2766351867143396235}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -57.582005, y: 0, z: 0}
 --- !u!1 &5372336219438337558
 GameObject:
@@ -943,8 +946,6 @@ Transform:
   - {fileID: 6259344662209553533}
   - {fileID: 8018730585604021458}
   - {fileID: 2964175862027411355}
-  - {fileID: 654485320055441281}
-  - {fileID: 5503021621097600420}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -960,6 +961,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0c62ccda0e69b45a66cfea935b3787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MouseSensitivity: 100
+  MoveSpeed: 10
 --- !u!1 &8438055497095930849
 GameObject:
   m_ObjectHideFlags: 0
